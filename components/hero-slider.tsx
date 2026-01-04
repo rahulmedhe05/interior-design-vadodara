@@ -54,16 +54,16 @@ export function HeroSlider() {
     })
 
     const message = `
-🏠 *INTERIOR DESIGN ENQUIRY* 🏠
+✨ *INTERIOR DESIGN ENQUIRY* ✨
 
-👤 *Full Name:* ${formData.fullName}
-📱 *Phone Number:* ${formData.phoneNumber}
-🏢 *Property Type:* ${formData.propertyType}
-📍 *City:* ${formData.city}
-💰 *Budget:* ${formData.budget || 'Not specified'}
+• *Full Name:* ${formData.fullName}
+• *Phone Number:* ${formData.phoneNumber}
+• *Property Type:* ${formData.propertyType}
+• *City:* ${formData.city}
+• *Budget:* ${formData.budget || 'Not specified'}
 
----
-📱 *Sent via Interior Design Studio Website*
+―――――――――――――
+_Sent via Essence Space Website_
     `.trim()
 
     const whatsappNumber = "916353583148"
