@@ -80,23 +80,32 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon-16x16.png', sizes: '16x16', type: 'image/png' },
+      { url: '/favicon-32x32.png', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon-48x48.png', sizes: '48x48', type: 'image/png' },
+      { url: '/favicon-192x192.png', sizes: '192x192', type: 'image/png' },
+      { url: '/favicon-512x512.png', sizes: '512x512', type: 'image/png' },
+      { url: '/icon.svg', type: 'image/svg+xml', rel: 'icon' },
+    ],
+    apple: '/apple-icon.png',
+    other: [
       {
-        url: "/icon-light-32x32.png",
-        media: "(prefers-color-scheme: light)",
-      },
-      {
-        url: "/icon-dark-32x32.png",
-        media: "(prefers-color-scheme: dark)",
-      },
-      {
-        url: "/icon.svg",
-        type: "image/svg+xml",
+        rel: 'mask-icon',
+        url: '/safari-pinned-tab.svg',
+        color: '#1e293b',
       },
     ],
-    apple: "/apple-icon.png",
+  },
+  manifest: '/site.webmanifest',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'black-translucent',
   },
   verification: {
-    google: "google-site-verification-code",
+    google: 'your-google-verification-code',
+    yandex: 'your-yandex-verification-code',
+    me: 'info@interiordesignvadodara.in',
   },
 }
 

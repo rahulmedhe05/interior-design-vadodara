@@ -6,6 +6,7 @@ import { siteConfig } from '@/lib/site-config';
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = siteConfig.url;
   const currentDate = new Date().toISOString();
+  const weekAgoDate = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
 
   // Homepage
   const homePage = {
@@ -15,20 +16,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 1.0,
   };
 
-  // Area pages - 34 Vadodara areas
+  // Area pages - 34 Vadodara areas (high priority - local search)
   const areaPages = getAllAreas().map((slug) => ({
     url: `${baseUrl}/${slug}`,
-    lastModified: currentDate,
+    lastModified: weekAgoDate,
     changeFrequency: 'weekly' as const,
-    priority: 0.8,
+    priority: 0.85,
   }));
 
-  // Keyword pages - 35+ keywords
-  const keywordPages = getAllKeywordPages().map((slug) => ({
+  // Keyword pages - 110 keywords (medium-high priority)
+  const keywordPages = getAllKeywordPages().map((slug, index) => ({
     url: `${baseUrl}/${slug}`,
-    lastModified: currentDate,
+    lastModified: weekAgoDate,
     changeFrequency: 'weekly' as const,
-    priority: 0.75,
+    // Randomize slightly within band (0.78-0.82) to seem fresh
+    priority: 0.78 + Math.random() * 0.04,
   }));
 
   // Static pages

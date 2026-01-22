@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 192">
+  <defs>
+    <linearGradient id="grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0f172a;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="192" height="192" fill="url(#grad)"/>
+  <!-- Building/Home icon -->
+  <path d="M 48 120 L 48 72 L 96 40 L 144 72 L 144 120 M 72 120 L 72 88 L 120 88 L 120 120 M 60 152 L 60 132 L 132 132 L 132 152" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Design accent - ruler/measurement lines -->
+  <g opacity="0.6">
+    <line x1="40" y1="155" x2="60" y2="155" stroke="#60a5fa" stroke-width="1"/>
+    <line x1="132" y1="155" x2="152" y2="155" stroke="#60a5fa" stroke-width="1"/>
+    <line x1="45" y1="150" x2="45" y2="160" stroke="#60a5fa" stroke-width="1"/>
+    <line x1="147" y1="150" x2="147" y2="160" stroke="#60a5fa" stroke-width="1"/>
+  </g>
+</svg>
