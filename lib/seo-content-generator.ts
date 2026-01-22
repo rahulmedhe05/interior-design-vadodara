@@ -441,15 +441,15 @@ We're proud to share that many of our ${areaName} clients have entrusted us with
     ],
 
     internalLinks: [
-      { text: `Modular Kitchen in ${areaName}`, href: `/interior-designers/modular-kitchen` },
-      { text: `2BHK Interior Design`, href: `/interior-designers/2bhk-interior-design` },
-      { text: `3BHK Interior Design`, href: `/interior-designers/3bhk-interior-design` },
-      { text: `Office Interior Design`, href: `/interior-designers/office-interior-design` },
-      { text: `Living Room Design`, href: `/interior-designers/living-room-interior-design` },
-      { text: `Bedroom Interior Design`, href: `/interior-designers/bedroom-interior-design` },
+      { text: `Modular Kitchen in ${areaName}`, href: `/modular-kitchen` },
+      { text: `2BHK Interior Design`, href: `/2bhk-interior-design` },
+      { text: `3BHK Interior Design`, href: `/3bhk-interior-design` },
+      { text: `Office Interior Design`, href: `/office-interior-design` },
+      { text: `Living Room Design`, href: `/living-room-interior-design` },
+      { text: `Bedroom Interior Design`, href: `/bedroom-interior-design` },
       ...nearbyAreas.map(a => ({
         text: `Interior Designers in ${getAreaDisplayName(a)}`,
-        href: `/interior-designers/${a}`
+        href: `/${a}`
       })),
     ],
 
@@ -468,7 +468,7 @@ We're proud to share that many of our ${areaName} clients have entrusted us with
         `living room design ${areaName.toLowerCase()}`,
         `interior decorator ${areaName.toLowerCase()} vadodara`,
       ],
-      canonical: `${siteConfig.url}/interior-designers/${area}`,
+      canonical: `${siteConfig.url}/${area}`,
     },
   };
 }
@@ -492,7 +492,7 @@ export function getKeywordContent(business: BusinessConfig, keyword: string, are
       ...baseContent.metaData,
       title: `${keywordTitle} in Vadodara | Best ${keywordTitle} Services`,
       description: `${keywordTitle} services in Vadodara by ${siteConfig.businessName}. Premium quality, affordable prices, free 3D design. 15+ years experience. Call ${siteConfig.contact.phone} for free consultation!`,
-      canonical: `${siteConfig.url}/interior-designers/${keyword}`,
+      canonical: `${siteConfig.url}/${keyword}`,
     }
   };
 }
