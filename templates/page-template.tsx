@@ -7,7 +7,7 @@ import { businesses } from '@/lib/business-config';
 import { siteConfig } from '@/lib/site-config';
 
 const business = businesses[0];
-const SLUG = "kitchen-design";
+const SLUG = "{{SLUG}}";
 
 export async function generateMetadata(): Promise<Metadata> {
   const siteUrl = siteConfig.url;

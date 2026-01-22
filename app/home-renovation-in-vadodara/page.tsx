@@ -1,29 +1,32 @@
 import { Metadata } from 'next';
-import { notFound } from 'next/navigation';
-import { getKeywordPageContent } from '@/lib/keyword-content-pages';
-import { getAreaContent } from '@/lib/area-content-data';
-import { parseFAQs, generateFAQSchema, getRelatedKeywords, getRelatedAreas, generateBreadcrumbSchema } from '@/lib/seo-helpers';
-import Link from 'next/link';
+import { getKeywordPageContent, generateDynamicKeywordContent } from '@/lib/keyword-content-pages';
+import { getAreaContent, getAllAreas } from '@/lib/area-content-data';
+import { parseFAQs, getRelatedKeywords, getRelatedAreas } from '@/lib/seo-helpers';
+import { UniversalPageTemplate } from '@/components/universal-page-template';
+import { businesses } from '@/lib/business-config';
+import { siteConfig } from '@/lib/site-config';
+
+const business = businesses[0];
+const SLUG = "home-renovation-in-vadodara";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const slug = "home-renovation-in-vadodara";
-  const siteUrl = "https://interiordesignvadodara.in";
-  const pageUrl = `${siteUrl}/${slug}`;
+  const siteUrl = siteConfig.url;
+  const pageUrl = `${siteUrl}/${SLUG}`;
   
-  const keywordPage = getKeywordPageContent(slug);
+  const keywordPage = getKeywordPageContent(SLUG);
   if (keywordPage) {
     return {
       title: keywordPage.metaTitle,
       description: keywordPage.metaDescription,
       keywords: [keywordPage.primaryKeyword, ...keywordPage.lsiKeywords, ...keywordPage.semanticKeywords].join(", "),
-      authors: [{ name: "Interior Design Vadodara" }],
+      authors: [{ name: siteConfig.businessName }],
       metadataBase: new URL(siteUrl),
       alternates: { canonical: pageUrl },
       openGraph: {
         title: keywordPage.metaTitle,
         description: keywordPage.metaDescription,
         url: pageUrl,
-        siteName: "Interior Design Vadodara",
+        siteName: siteConfig.businessName,
         type: "website",
         images: [{ url: `${siteUrl}/og-image.jpg`, width: 1200, height: 630, alt: keywordPage.primaryKeyword }],
       },
@@ -35,232 +38,126 @@ export async function generateMetadata(): Promise<Metadata> {
     };
   }
 
-  const area = getAreaContent(slug);
+  const area = getAreaContent(SLUG);
   if (area) {
     return {
-      title: `${area.name} Interior Design in Vadodara | Professional Services`,
-      description: `Expert interior design in ${area.name}, Vadodara. Professional home & office design services.`,
-      keywords: [`${area.name} interior design`, area.name, "Vadodara interior design"].join(", "),
-      authors: [{ name: "Interior Design Vadodara" }],
+      title: `Best Interior Designers in ${area.name}, Vadodara | ${siteConfig.businessName}`,
+      description: `Expert interior design services in ${area.name}, Vadodara. 15+ years experience, 500+ projects. Free 3D consultation. Call ${siteConfig.contact.phone}`,
+      keywords: [`interior designers in ${area.name}`, `${area.name} interior design`, "Vadodara interior design", `home interior ${area.name}`].join(", "),
+      authors: [{ name: siteConfig.businessName }],
       metadataBase: new URL(siteUrl),
       alternates: { canonical: pageUrl },
       openGraph: {
-        title: `${area.name} Interior Design in Vadodara`,
-        description: `Expert interior design services in ${area.name}`,
+        title: `Best Interior Designers in ${area.name}, Vadodara`,
+        description: `Expert interior design services in ${area.name}. Free 3D consultation.`,
         url: pageUrl,
+        siteName: siteConfig.businessName,
         type: "website",
+        images: [{ url: `${siteUrl}/og-image.jpg`, width: 1200, height: 630, alt: `Interior Design in ${area.name}` }],
+      },
+      twitter: {
+        card: "summary_large_image",
+        title: `Best Interior Designers in ${area.name}, Vadodara`,
+        description: `Expert interior design services in ${area.name}. Call ${siteConfig.contact.phone}`,
       },
     };
   }
 
-  return { title: "Page Not Found" };
+  // Generate dynamic content for unknown keywords
+  const dynamicContent = generateDynamicKeywordContent(SLUG);
+  return {
+    title: dynamicContent.metaTitle,
+    description: dynamicContent.metaDescription,
+    alternates: { canonical: pageUrl },
+  };
 }
 
 export default function Page() {
-  const slug = "home-renovation-in-vadodara";
-  const siteUrl = "https://interiordesignvadodara.in";
-  const pageUrl = `${siteUrl}/${slug}`;
-
-  const keywordPage = getKeywordPageContent(slug);
+  const keywordPage = getKeywordPageContent(SLUG);
+  
   if (keywordPage) {
     const faqs = parseFAQs(keywordPage.faqSection);
-    const relatedKeywords = getRelatedKeywords(slug, 5);
-    const relatedAreas = getRelatedAreas(3);
+    const relatedKeywords = getRelatedKeywords(SLUG, 6);
+    const relatedAreas = getRelatedAreas(12);
     
-    const breadcrumbs = [
-      { label: 'Home', url: siteUrl },
-      { label: keywordPage.primaryKeyword, url: pageUrl },
-    ];
-
     return (
-      <>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "FAQPage",
-          mainEntity: faqs.map(faq => ({
-            "@type": "Question",
-            name: faq.question,
-            acceptedAnswer: {
-              "@type": "Answer",
-              text: faq.answer,
-            },
-          })),
-        }) }} />
-        
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbs.map((item, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            name: item.label,
-            item: item.url,
-          })),
-        }) }} />
-        
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "Article",
-          headline: keywordPage.h1,
-          description: keywordPage.metaDescription,
-          image: `${siteUrl}/og-image.jpg`,
-          datePublished: new Date().toISOString(),
-          author: { "@type": "Organization", name: "Interior Design Vadodara", url: siteUrl },
-          publisher: { "@type": "Organization", name: "Interior Design Vadodara" },
-        }) }} />
-
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-          <div className="max-w-4xl mx-auto px-4 py-6 text-sm text-slate-600">
-            <Link href="/">Home</Link> / <span className="text-slate-900">{keywordPage.primaryKeyword}</span>
-          </div>
-
-          <article className="max-w-4xl mx-auto px-4 py-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">{keywordPage.h1}</h1>
-            
-            <section className="prose prose-lg max-w-none mb-12">
-              <div className="text-slate-700" dangerouslySetInnerHTML={{ __html: keywordPage.introContent.split("\n\n").map((p: string) => `<p>${p}</p>`).join("") }} />
-            </section>
-
-            <section className="prose prose-lg max-w-none mb-12">
-              <div className="text-slate-700" dangerouslySetInnerHTML={{ __html: keywordPage.mainContent.split("##").map((s: string, i: number) => {
-                if (i === 0) return "";
-                const [h, ...c] = s.split("\n");
-                return `<div class="mb-8"><h2 class="text-2xl font-bold mb-4 mt-8">${h.trim()}</h2><div>${c.join("\n").trim().split("\n\n").map((p: string) => `<p>${p}</p>`).join("")}</div></div>`;
-              }).join("") }} />
-            </section>
-
-            <section className="mb-12 bg-slate-50 p-8 rounded-lg">
-              <h2 className="text-2xl font-bold mb-6">Frequently Asked Questions</h2>
-              <div className="space-y-4">
-                {faqs.map((faq: any, index: number) => (
-                  <details key={index} className="p-4 bg-white rounded-lg border cursor-pointer group">
-                    <summary className="font-semibold text-slate-900 group-open:text-blue-600 transition-colors">
-                      Q: {faq.question}
-                    </summary>
-                    <p className="mt-3 text-slate-700 leading-relaxed">A: {faq.answer}</p>
-                  </details>
-                ))}
-              </div>
-            </section>
-
-            <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-12 rounded-lg text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">{keywordPage.callToAction}</h2>
-              <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
-                Book Free Consultation
-              </button>
-            </section>
-
-            {relatedKeywords.length > 0 && (
-              <section className="mb-12">
-                <h3 className="text-2xl font-bold mb-6">Related Services</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {relatedKeywords.map((keyword: string) => (
-                    <Link key={keyword} href={`/${keyword}`} className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                      <span className="text-blue-600 font-semibold capitalize">{keyword.replace(/-/g, ' ')}</span>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )}
-
-            {relatedAreas.length > 0 && (
-              <section>
-                <h3 className="text-2xl font-bold mb-6">Our Service Areas</h3>
-                <div className="grid md:grid-cols-3 gap-4">
-                  {relatedAreas.map((area: string) => (
-                    <Link key={area} href={`/${area}`} className="p-4 bg-green-50 rounded-lg hover:bg-green-100 transition-colors">
-                      <span className="text-green-600 font-semibold capitalize">{area.replace(/-/g, ' ')}</span>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )}
-          </article>
-        </div>
-      </>
+      <UniversalPageTemplate
+        business={business}
+        slug={SLUG}
+        pageType="keyword"
+        content={{
+          h1: keywordPage.h1,
+          metaTitle: keywordPage.metaTitle,
+          metaDescription: keywordPage.metaDescription,
+          introContent: keywordPage.introContent,
+          mainContent: keywordPage.mainContent,
+          faqs: faqs,
+          relatedKeywords: relatedKeywords,
+          relatedAreas: relatedAreas,
+          callToAction: keywordPage.callToAction,
+        }}
+      />
     );
   }
 
-  const area = getAreaContent(slug);
+  const area = getAreaContent(SLUG);
   if (area) {
-    const relatedKeywords = getRelatedKeywords("", 5);
+    const relatedKeywords = getRelatedKeywords("", 6);
+    const relatedAreas = getAllAreas().filter(a => a !== SLUG).slice(0, 12);
     
-    const breadcrumbs = [
-      { label: 'Home', url: siteUrl },
-      { label: area.name, url: pageUrl },
+    const faqs = [
+      { question: `What interior design services do you offer in ${area.name}?`, answer: `We offer complete home interior design, modular kitchens, bedroom designs, living room interiors, office interiors, and renovation services in ${area.name}, Vadodara.` },
+      { question: `How much does interior design cost in ${area.name}?`, answer: `Interior design costs in ${area.name} range from ₹800 to ₹2500 per sq ft depending on materials and design complexity. We offer free consultations for accurate quotes.` },
+      { question: `Do you provide free consultation in ${area.name}?`, answer: `Yes! We provide free consultation and 3D design visualization for all projects in ${area.name} and surrounding areas of Vadodara.` },
+      { question: `How long does an interior project take in ${area.name}?`, answer: `Typical projects in ${area.name} take 45-90 days depending on scope. We ensure timely delivery with regular progress updates.` },
+      { question: `Why choose your services in ${area.name}?`, answer: `With 15+ years experience, 500+ completed projects, and deep knowledge of ${area.name}'s residential preferences, we deliver exceptional results that match your lifestyle.` },
     ];
-
+    
     return (
-      <>
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "BreadcrumbList",
-          itemListElement: breadcrumbs.map((item, index) => ({
-            "@type": "ListItem",
-            position: index + 1,
-            name: item.label,
-            item: item.url,
-          })),
-        }) }} />
-        
-        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify({
-          "@context": "https://schema.org",
-          "@type": "LocalBusiness",
-          name: `Interior Design in ${area.name}`,
-          description: `Professional interior design services in ${area.name}, Vadodara`,
-          areaServed: area.name,
-          url: pageUrl,
-          image: `${siteUrl}/og-image.jpg`,
-        }) }} />
-
-        <div className="min-h-screen bg-gradient-to-b from-slate-50 to-white">
-          <div className="max-w-4xl mx-auto px-4 py-6 text-sm text-slate-600">
-            <Link href="/">Home</Link> / <span className="text-slate-900">{area.name}</span>
-          </div>
-
-          <article className="max-w-4xl mx-auto px-4 py-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Interior Design in {area.name}, Vadodara</h1>
-            
-            <div className="grid md:grid-cols-2 gap-6 mb-12">
-              <div className="bg-blue-50 p-6 rounded-lg">
-                <h3 className="font-bold mb-2">Demographics</h3>
-                <p className="text-sm text-slate-700">{area.demographics}</p>
-              </div>
-              <div className="bg-green-50 p-6 rounded-lg">
-                <h3 className="font-bold mb-2">Connectivity</h3>
-                <p className="text-sm text-slate-700">{area.connectivity}</p>
-              </div>
-            </div>
-
-            <section className="prose prose-lg max-w-none mb-12">
-              <h2 className="text-2xl font-bold mb-4">About {area.name}</h2>
-              <p className="text-slate-700 leading-relaxed">{area.areaHistory}</p>
-            </section>
-
-            <section className="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-12 rounded-lg text-center mb-12">
-              <h2 className="text-3xl font-bold mb-4">Transform Your Space in {area.name}</h2>
-              <button className="bg-white text-blue-600 px-8 py-3 rounded-lg font-semibold hover:bg-slate-50 transition-colors">
-                Book Free Consultation
-              </button>
-            </section>
-
-            {relatedKeywords.length > 0 && (
-              <section>
-                <h3 className="text-2xl font-bold mb-6">Our Interior Design Services</h3>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {relatedKeywords.slice(0, 6).map((keyword: string) => (
-                    <Link key={keyword} href={`/${keyword}`} className="p-4 bg-blue-50 rounded-lg hover:bg-blue-100 transition-colors">
-                      <span className="text-blue-600 font-semibold capitalize">{keyword.replace(/-/g, ' ')}</span>
-                    </Link>
-                  ))}
-                </div>
-              </section>
-            )}
-          </article>
-        </div>
-      </>
+      <UniversalPageTemplate
+        business={business}
+        slug={SLUG}
+        pageType="area"
+        content={{
+          h1: `Interior Design in ${area.name}`,
+          metaTitle: `Best Interior Designers in ${area.name}, Vadodara`,
+          metaDescription: `Expert interior design services in ${area.name}, Vadodara. 15+ years experience, 500+ projects completed.`,
+          introContent: `Looking for the **best interior designers in ${area.name}**, Vadodara? ${siteConfig.businessName} brings premium interior design services right to your doorstep in ${area.name}.\n\n${area.areaHistory}\n\nOur team of experienced designers understands the unique requirements of ${area.name} residents. Whether you live in a ${area.propertyTypes.slice(0,2).join(" or ")}, we create stunning interiors that reflect your personality and lifestyle.`,
+          mainContent: `## Why Choose Us for Interior Design in ${area.name}?\n\nAs the leading interior design company serving ${area.name}, we bring:\n\n- **Local Expertise**: Deep understanding of ${area.name}'s architectural styles and preferences\n- **Premium Materials**: Access to the best materials and finishes\n- **Experienced Team**: 15+ years of interior design excellence\n- **On-Time Delivery**: Commitment to project timelines\n- **Affordable Pricing**: Competitive rates without compromising quality\n\n## Our Services in ${area.name}\n\nWe offer comprehensive interior design services:\n\n- **Complete Home Interiors**: End-to-end design solutions\n- **Modular Kitchen**: Modern, space-efficient kitchen designs\n- **Bedroom Interior**: Relaxing and stylish bedroom spaces\n- **Living Room Design**: Elegant and functional living areas\n- **Office Interiors**: Professional workspace designs\n- **Renovation Services**: Transform your existing space\n\n## ${area.name} - Area Overview\n\n${area.demographics}\n\nConnectivity: ${area.connectivity}\n\nKey Landmarks: ${area.landmarks.join(", ")}`,
+          faqs: faqs,
+          relatedKeywords: relatedKeywords,
+          relatedAreas: relatedAreas,
+          areaName: area.name,
+          demographics: area.demographics,
+          connectivity: area.connectivity,
+          landmarks: area.landmarks,
+        }}
+      />
     );
   }
 
-  return <div>Page not found</div>;
+  // Fallback for dynamic keywords
+  const dynamicContent = generateDynamicKeywordContent(SLUG);
+  const faqs = parseFAQs(dynamicContent.faqSection);
+  const relatedKeywords = getRelatedKeywords(SLUG, 6);
+  const relatedAreas = getRelatedAreas(12);
+  
+  return (
+    <UniversalPageTemplate
+      business={business}
+      slug={SLUG}
+      pageType="keyword"
+      content={{
+        h1: dynamicContent.h1,
+        metaTitle: dynamicContent.metaTitle,
+        metaDescription: dynamicContent.metaDescription,
+        introContent: dynamicContent.introContent,
+        mainContent: dynamicContent.mainContent,
+        faqs: faqs,
+        relatedKeywords: relatedKeywords,
+        relatedAreas: relatedAreas,
+        callToAction: dynamicContent.callToAction,
+      }}
+    />
+  );
 }

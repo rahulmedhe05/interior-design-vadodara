@@ -2646,7 +2646,7 @@ const additionalKeywordPages8: Record<string, KeywordPageContent> = {
 Object.assign(keywordPages, additionalKeywordPages8);
 
 // Dynamic content generator for new keyword pages
-function generateDynamicKeywordContent(slug: string): KeywordPageContent {
+export function generateDynamicKeywordContent(slug: string): KeywordPageContent {
   const keyword = slug.replace(/-/g, ' ');
   const titleKeyword = keyword.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
   
