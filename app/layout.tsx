@@ -16,47 +16,56 @@ const inter = Inter({
   display: "swap",
 })
 
+// Site Configuration
+const siteUrl = "https://interiordesignvadodara.in";
+const siteName = "Interior Design Vadodara";
+const sitePhone = "+91 63535 83148";
+const siteEmail = "info@interiordesignvadodara.in";
+
 export const metadata: Metadata = {
-  title: "Nesture Interiors - Best Interior Designer in Bangalore | Transform Your Space",
+  title: {
+    default: "Best Interior Designers in Vadodara | Interior Design Vadodara",
+    template: "%s | Interior Design Vadodara",
+  },
   description:
-    "Nesture Interiors - Where innovation meets elegance. Expert residential & commercial interior design in Bangalore, Karnataka. Beautiful interiors yet affordable. Free consultation & 3D visualization. Call +91 861 808 0171",
+    "Looking for the best interior designers in Vadodara? Interior Design Vadodara offers premium home & office interior design services. 15+ years experience, 500+ projects completed. Free 3D design consultation!",
   keywords:
-    "interior design Bangalore, home interior design, office interior design, commercial interiors, space planning, interior decorator Bangalore, home renovation Bangalore, luxury interiors, modern design, interior styling, furniture design, kitchen design, bedroom interior, living room design, interior design services, best interior designer Bangalore, Nesture Interiors",
-  authors: [{ name: "Nesture Interiors Bangalore" }],
-  creator: "Nesture Interiors",
-  publisher: "Nesture Interiors",
+    "interior designers vadodara, best interior designers vadodara, home interior design vadodara, modular kitchen vadodara, office interior design vadodara, bedroom interior vadodara, living room design vadodara, interior decorator vadodara",
+  authors: [{ name: siteName }],
+  creator: siteName,
+  publisher: siteName,
   formatDetection: {
     email: true,
     address: true,
     telephone: true,
   },
-  metadataBase: new URL("https://nestureinteriors.com"),
+  metadataBase: new URL(siteUrl),
   alternates: {
-    canonical: "https://nestureinteriors.com",
+    canonical: siteUrl,
   },
   openGraph: {
-    title: "Nesture Interiors - Best Interior Designer in Bangalore",
+    title: "Best Interior Designers in Vadodara | Interior Design Vadodara",
     description:
-      "Transform your space with Nesture Interiors - Where innovation meets elegance. Residential & commercial interior design in Bangalore with expert craftsmanship.",
-    url: "https://nestureinteriors.com",
-    siteName: "Nesture Interiors",
+      "Transform your space with Vadodara's most trusted interior designers. Home interior, modular kitchen, bedroom, living room, office interiors. Free 3D design consultation!",
+    url: siteUrl,
+    siteName: siteName,
     locale: "en_IN",
     type: "website",
     images: [
       {
-        url: "https://nestureinteriors.com/og-image.jpg",
+        url: `${siteUrl}/og-image.jpg`,
         width: 1200,
         height: 630,
-        alt: "Nesture Interiors - Premium Interior Design in Bangalore",
+        alt: "Best Interior Designers in Vadodara",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nesture Interiors - Best Interior Designer in Bangalore",
-    description: "Expert interior design for homes, offices & commercial spaces. Where innovation meets elegance. Transform your space today!",
-    images: ["https://nestureinteriors.com/og-image.jpg"],
-    creator: "@nestureinteriors",
+    title: "Best Interior Designers in Vadodara",
+    description: "Premium home interior design, modular kitchen, bedroom, living room, office interiors in Vadodara. Free consultation!",
+    images: [`${siteUrl}/og-image.jpg`],
+    creator: "@idvadodara",
   },
   robots: {
     index: true,
@@ -68,11 +77,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  viewport: {
-    width: "device-width",
-    initialScale: 1,
-    maximumScale: 5,
   },
   icons: {
     icon: [
@@ -106,76 +110,79 @@ export default function RootLayout({
     "@graph": [
       {
         "@type": "LocalBusiness",
-        "@id": "https://nestureinteriors.com/#organization",
-        name: "Nesture Interiors",
-        image: "https://nestureinteriors.com/logo.png",
-        description: "Where innovation meets elegance - Expert residential & commercial interior design services in Bangalore, Karnataka",
-        url: "https://nestureinteriors.com",
-        telephone: "+918618080171",
-        email: "nestureinterior@gmail.com",
+        "@id": `${siteUrl}/#organization`,
+        name: siteName,
+        image: `${siteUrl}/logo.png`,
+        description: "Best interior designers in Vadodara offering premium home interior design, modular kitchen, bedroom, living room, office interiors. 15+ years experience, 500+ projects completed.",
+        url: siteUrl,
+        telephone: sitePhone,
+        email: siteEmail,
         address: {
           "@type": "PostalAddress",
-          streetAddress: "Nesture Interiors",
-          addressLocality: "Bangalore",
-          addressRegion: "KA",
-          postalCode: "560001",
+          streetAddress: "301, Shree Krishna Complex, Near HDFC Bank",
+          addressLocality: "Alkapuri, Vadodara",
+          addressRegion: "Gujarat",
+          postalCode: "390007",
           addressCountry: "IN",
         },
-        sameAs: [],
-        priceRange: "$$$",
+        geo: {
+          "@type": "GeoCoordinates",
+          latitude: "22.3072",
+          longitude: "73.1812"
+        },
+        sameAs: [
+          "https://facebook.com/interiordesignvadodara",
+          "https://instagram.com/interiordesignvadodara",
+          "https://linkedin.com/company/interiordesignvadodara"
+        ],
+        priceRange: "₹₹₹",
+        openingHours: "Mo-Sa 09:00-19:00",
         serviceArea: {
           "@type": "City",
-          name: "Bangalore",
+          name: "Vadodara, Gujarat, India",
         },
-        areaServed: ["Koramangala", "Indiranagar", "Whitefield", "HSR Layout", "Jayanagar", "JP Nagar", "Marathahalli", "Electronic City"],
+        areaServed: ["Vadodara", "Alkapuri", "Akota", "Gotri", "Manjalpur", "Sayajigunj", "Fatehgunj", "Karelibaug", "Subhanpura", "Race Course", "Harni", "Tandalja", "Nizampura", "Makarpura", "Sama", "Waghodia Road", "Chhani", "Old Padra Road"],
+        aggregateRating: {
+          "@type": "AggregateRating",
+          ratingValue: "4.9",
+          reviewCount: "500"
+        }
       },
       {
         "@type": "Organization",
-        "@id": "https://nestureinteriors.com/#organization",
-        name: "Nesture Interiors",
-        url: "https://nestureinteriors.com",
-        logo: "https://nestureinteriors.com/logo.png",
-        foundingDate: "2024",
-        founders: [{ "@type": "Person", name: "Nesture Interiors Team" }],
+        "@id": `${siteUrl}/#organization`,
+        name: siteName,
+        url: siteUrl,
+        logo: `${siteUrl}/logo.png`,
+        foundingDate: "2010",
         knowsAbout: [
           "Interior Design",
-          "Home Design",
+          "Home Interior Design",
+          "Modular Kitchen Design",
+          "Bedroom Interior Design",
+          "Living Room Interior Design",
           "Office Interior Design",
           "Commercial Interior Design",
-          "Space Planning",
-          "Furniture Design",
+          "False Ceiling Design",
+          "Wardrobe Design",
+          "Kitchen Cabinet Design",
         ],
       },
       {
-        "@type": "Service",
-        "@id": "https://nestureinteriors.com/#service-residential",
-        name: "Residential Interior Design",
-        description: "Professional residential interior design services including space planning, 3D visualization, and complete project management",
-        provider: {
-          "@id": "https://nestureinteriors.com/#organization",
+        "@type": "WebSite",
+        "@id": `${siteUrl}/#website`,
+        url: siteUrl,
+        name: siteName,
+        description: "Best Interior Designers in Vadodara",
+        publisher: {
+          "@id": `${siteUrl}/#organization`
         },
-        areaServed: "Bangalore",
-        priceRange: "$$$",
-      },
-      {
-        "@type": "Service",
-        "@id": "https://nestureinteriors.com/#service-commercial",
-        name: "Commercial Interior Design",
-        description: "Expert commercial and office interior design with brand integration and complete installation supervision",
-        provider: {
-          "@id": "https://nestureinteriors.com/#organization",
-        },
-        areaServed: "Bangalore",
-        priceRange: "$$$$",
-      },
-      {
-        "@type": "AggregateRating",
-        "@id": "https://nestureinteriors.com/#rating",
-        ratingValue: "4.9",
-        ratingCount: "150",
-        bestRating: "5",
-        worstRating: "1",
-      },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: `${siteUrl}/search?q={search_term_string}`,
+          "query-input": "required name=search_term_string"
+        }
+      }
     ],
   }
 

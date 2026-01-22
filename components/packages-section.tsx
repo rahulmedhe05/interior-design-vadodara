@@ -57,7 +57,7 @@ const packages = [
 export function PackagesSection() {
   const handleWhatsAppInquiry = (packageName: string) => {
     const message = `Hello! I'm interested in the ${packageName} interior design package. Please provide more details.`
-    const whatsappNumber = "919876543210"
+    const whatsappNumber = "916353583148"
     const whatsappURL = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`
     window.open(whatsappURL, "_blank")
   }
