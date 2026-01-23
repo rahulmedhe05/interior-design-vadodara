@@ -9,30 +9,20 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: 'Googlebot',
         allow: '/',
-        crawlDelay: 1,
-        disallow: ['/api/', '/_next/', '/admin/', '/*.json$', '/private/', '/temp/', '/preview/'],
+        disallow: ['/api/', '/_next/', '/admin/'],
       },
       {
         userAgent: 'Bingbot',
         allow: '/',
-        crawlDelay: 2,
-        disallow: ['/api/', '/_next/', '/admin/', '/*.json$', '/private/', '/temp/', '/preview/'],
-      },
-      {
-        userAgent: 'Slurp',
-        allow: '/',
-        crawlDelay: 2,
-        disallow: ['/api/', '/_next/', '/admin/', '/*.json$', '/private/', '/temp/', '/preview/'],
+        disallow: ['/api/', '/_next/', '/admin/'],
       },
       {
         userAgent: '*',
         allow: '/',
-        crawlDelay: 3,
-        requestRate: { requests: 10, seconds: 60 },
-        disallow: ['/api/', '/_next/', '/admin/', '/*.json$', '/private/', '/temp/', '/preview/'],
+        disallow: ['/api/', '/_next/', '/admin/'],
       },
     ],
-    sitemap: [`${baseUrl}/sitemap.xml`, `${baseUrl}/sitemap-mobile.xml`],
+    sitemap: `${baseUrl}/sitemap.xml`,
     host: baseUrl,
   };
 }
