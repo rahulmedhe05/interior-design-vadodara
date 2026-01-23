@@ -2691,54 +2691,53 @@ export function generateDynamicKeywordContent(slug: string): KeywordPageContent 
 }
 
 export function getKeywordPageContent(slug: string): KeywordPageContent | undefined {
-  return keywordPages[slug] || generateDynamicKeywordContent(slug);
+  // Check if slug ends with -in-vadodara and try base slug first
+  const baseSlug = slug.replace(/-in-vadodara$/, '');
+  return keywordPages[slug] || keywordPages[baseSlug] || generateDynamicKeywordContent(slug);
 }
 
 export function getAllKeywordPages(): string[] {
-  // Read from file system or return hardcoded list
-  const allSlugs = new Set(Object.keys(keywordPages));
-  
-  // Add new keyword slugs from expanded list
-  const newKeywords = [
-    "2-bhk-interior-design", "3-bhk-interior-design", "3-bhk-interior-design",
-    "bathroom-designs", "bathroom-interior-design", "bed-back-wall-design",
-    "bed-design-for-girl", "bedroom-design-for-girls", "bedroom-furniture-design",
-    "bedroom-home-interior-design", "bedroom-interior-design", "best-interior-designers-near-me",
-    "boys-room-decor", "cafe-interior-design", "children-bed-design",
-    "children-bedroom", "children-room", "children-room-design",
-    "commercial-interior-fitouts", "creative-small-office-interior-design", "drawing-room-interior-design",
-    "drawing-room-wall-design", "flat-interior-design", "furniture-design",
-    "ghar-ka-design", "hall-interior-design", "home-design",
-    "home-improvement", "home-interior", "home-interior-design",
-    "home-renovation", "home-style", "hospital-interior-design",
-    "hotel-interior-design", "hotel-room-interior-design", "house-interior-design",
-    "interior", "interior-company", "interior-decoration",
-    "interior-design", "interior-design-contractors", "interior-design-near-me",
-    "interior-designer-in-vadodoara", "interior-designers-in-vadodoara", "interior-designers-near-me",
-    "interior-fit-out", "interior-fitout", "interior-wall-design",
-    "interior-work", "kids-bed-design", "kids-bedroom",
-    "kids-bedroom-design", "kids-room", "kids-room-decor",
-    "kids-room-design", "kids-room-interior", "kids-room-interior-design",
-    "kitchen-cabinet-design", "kitchen-design", "kitchen-furniture",
-    "kitchen-interior-design", "living-room-design", "living-room-home-interior-design",
-    "living-room-interior", "living-room-interior-design", "living-room-wall-design",
-    "low-budget-beauty-salon-interior-design", "low-budget-small-office-interior-design", "luxury-bedroom-interior-design",
-    "master-bedroom-design", "master-bedroom-interior-design", "modern-bed-design",
-    "modern-bedroom-designs", "modern-bedroom-interior-design", "modern-kitchen",
-    "modern-kitchen-design", "modern-living-room-design", "modern-office-interior",
-    "modern-office-interior-design", "modern-small-office-interior-design", "modular-kitchen",
-    "modular-kitchen-design", "office-cabin-interior-design", "office-decor",
-    "office-design", "office-interior", "office-interior-design",
-    "office-interior-design-services", "office-room-design", "office-room-interior-design",
-    "office-wall-design", "open-kitchen-design", "pop-designs-for-bedroom",
-    "renovation", "restaurant-interior-design", "restaurant-interior-design-low-budget",
-    "room-interior-design", "room-wall-design", "rooms-for-kids",
-    "salon-interior-design", "shop-interior-design", "simple-bedroom-interior-design",
-    "small-bedroom-interior-design", "small-office-interior-design", "small-salon-interior-design",
-    "turnkey-project", "turnkey-solutions", "villa-interior-design"
+  // All keyword pages now have "-in-vadodara" suffix
+  const baseKeywords = [
+    "1bhk-flat-interior-design", "2-bhk-interior-design", "2bhk-interior-design",
+    "3-bhk-interior-design", "3bhk-interior-design", "bathroom-designs",
+    "bathroom-interior-design", "bed-back-wall-design", "bed-design-for-girl",
+    "bedroom-design-for-girls", "bedroom-furniture-design", "bedroom-home-interior-design",
+    "bedroom-interior-design", "best-interior-designers-near-me", "boys-room-decor",
+    "cafe-interior-design", "children-bed-design", "children-bedroom",
+    "children-room", "children-room-design", "commercial-interior-fitouts",
+    "creative-small-office-interior-design", "drawing-room-interior-design", "drawing-room-wall-design",
+    "flat-interior-design", "furniture-design", "ghar-ka-design",
+    "hall-interior-design", "home-design", "home-improvement",
+    "home-interior", "home-interior-design", "home-renovation",
+    "home-style", "hospital-interior-design", "hotel-interior-design",
+    "hotel-room-interior-design", "house-interior-design", "interior",
+    "interior-company", "interior-decoration", "interior-design",
+    "interior-design-contractors", "interior-design-near-me", "interior-designer-in-vadodoara",
+    "interior-designers-in-vadodoara", "interior-designers-near-me", "interior-fit-out",
+    "interior-fitout", "interior-wall-design", "interior-work",
+    "kids-bed-design", "kids-bedroom", "kids-bedroom-design",
+    "kids-room", "kids-room-decor", "kids-room-design",
+    "kids-room-interior", "kids-room-interior-design", "kitchen-cabinet-design",
+    "kitchen-design", "kitchen-furniture", "kitchen-interior-design",
+    "living-room-design", "living-room-home-interior-design", "living-room-interior",
+    "living-room-interior-design", "living-room-wall-design", "low-budget-beauty-salon-interior-design",
+    "low-budget-small-office-interior-design", "luxury-bedroom-interior-design", "master-bedroom-design",
+    "master-bedroom-interior-design", "modern-bed-design", "modern-bedroom-designs",
+    "modern-bedroom-interior-design", "modern-kitchen", "modern-kitchen-design",
+    "modern-living-room-design", "modern-office-interior", "modern-office-interior-design",
+    "modern-small-office-interior-design", "modular-kitchen", "modular-kitchen-design",
+    "office-cabin-interior-design", "office-decor", "office-design",
+    "office-interior", "office-interior-design", "office-interior-design-services",
+    "office-room-design", "office-room-interior-design", "office-wall-design",
+    "open-kitchen-design", "pop-designs-for-bedroom", "renovation",
+    "restaurant-interior-design", "restaurant-interior-design-low-budget", "room-interior-design",
+    "room-wall-design", "rooms-for-kids", "salon-interior-design",
+    "shop-interior-design", "simple-bedroom-interior-design", "small-bedroom-interior-design",
+    "small-office-interior-design", "small-salon-interior-design", "turnkey-project",
+    "turnkey-solutions", "villa-interior-design"
   ];
   
-  newKeywords.forEach(slug => allSlugs.add(slug));
-  
-  return Array.from(allSlugs);
+  // Add "-in-vadodara" suffix to all keywords
+  return baseKeywords.map(slug => `${slug}-in-vadodara`);
 }
