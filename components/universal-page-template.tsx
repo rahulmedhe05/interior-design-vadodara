@@ -41,9 +41,14 @@ export function UniversalPageTemplate({ business, slug, pageType, content }: Uni
   // FAQ Schema for SEO
   const faqSchema = generateFAQSchema(content.faqs);
 
+  // Add "in Vadodara" for keyword pages if not already present
+  const keywordH1 = content.h1.toLowerCase().includes('vadodara') 
+    ? content.h1 
+    : `${content.h1} in Vadodara`;
+
   const heroTitle = pageType === "area" 
     ? `Best Interior Designers in ${displayName}, Vadodara`
-    : content.h1;
+    : keywordH1;
   
   const heroSubtitle = pageType === "area"
     ? `Transform your home in ${displayName} with premium interior design services. Free 3D consultation, 15+ years experience. Call ${siteConfig.contact.phone}`
@@ -113,7 +118,7 @@ export function UniversalPageTemplate({ business, slug, pageType, content }: Uni
         <div className="absolute inset-0 flex items-center justify-center text-white text-center px-4">
           <div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4">
-              {pageType === "area" ? `Interior Design in ${displayName}` : displayName}
+              {pageType === "area" ? `Interior Design in ${displayName}` : keywordH1}
             </h2>
             <p className="text-lg md:text-xl opacity-90">Trusted by {siteConfig.trustBadges.customers} Families Across Vadodara</p>
           </div>
@@ -128,7 +133,7 @@ export function UniversalPageTemplate({ business, slug, pageType, content }: Uni
               <h2 className="text-3xl md:text-4xl font-bold mb-6">
                 {pageType === "area" 
                   ? `About Interior Design Services in ${displayName}`
-                  : `About ${displayName}`
+                  : `About ${keywordH1}`
                 }
               </h2>
               <div className="prose prose-lg max-w-none text-gray-700 leading-relaxed">
