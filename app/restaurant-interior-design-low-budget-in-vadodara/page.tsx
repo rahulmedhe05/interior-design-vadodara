@@ -40,16 +40,35 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const area = getAreaContent(SLUG);
   if (area) {
+    const areaKeywords = [
+      `interior designers in ${area.name}`,
+      `${area.name} interior design`,
+      `best interior designers in ${area.name} Vadodara`,
+      `home interior design ${area.name}`,
+      `interior design services ${area.name} Vadodara`,
+      `modular kitchen ${area.name}`,
+      `bedroom interior design ${area.name}`,
+      `living room design ${area.name}`,
+      `office interior ${area.name} Vadodara`,
+      `interior decorator ${area.name}`,
+      `home renovation ${area.name} Vadodara`,
+      `flat interior design ${area.name}`,
+      `house interior ${area.name}`,
+      `interior design company ${area.name}`,
+      `Vadodara interior design`,
+    ];
+    const areaTitle = `Best Interior Designers in ${area.name}, Vadodara | 500+ Projects ✓ Free 3D Design`;
+    const areaDescription = `Looking for expert interior designers in ${area.name}, Vadodara? ✓ 15+ Years Experience ✓ 500+ Happy Clients ✓ Free 3D Consultation ✓ Modular Kitchen, Bedroom, Living Room & Office Interiors. Call ${siteConfig.contact.phone} for a free quote!`;
     return {
-      title: `Best Interior Designers in ${area.name}, Vadodara | ${siteConfig.businessName}`,
-      description: `Expert interior design services in ${area.name}, Vadodara. 15+ years experience, 500+ projects. Free 3D consultation. Call ${siteConfig.contact.phone}`,
-      keywords: [`interior designers in ${area.name}`, `${area.name} interior design`, "Vadodara interior design", `home interior ${area.name}`].join(", "),
+      title: areaTitle,
+      description: areaDescription,
+      keywords: areaKeywords.join(", "),
       authors: [{ name: siteConfig.businessName }],
       metadataBase: new URL(siteUrl),
       alternates: { canonical: pageUrl },
       openGraph: {
-        title: `Best Interior Designers in ${area.name}, Vadodara`,
-        description: `Expert interior design services in ${area.name}. Free 3D consultation.`,
+        title: `Best Interior Designers in ${area.name}, Vadodara | ${siteConfig.businessName}`,
+        description: `Transform your home in ${area.name} with premium interior design. Free 3D consultation, expert designers, affordable packages.`,
         url: pageUrl,
         siteName: siteConfig.businessName,
         type: "website",

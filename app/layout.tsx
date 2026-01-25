@@ -103,8 +103,7 @@ export const metadata: Metadata = {
     statusBarStyle: 'black-translucent',
   },
   verification: {
-    google: 'your-google-verification-code',
-    yandex: 'your-yandex-verification-code',
+    // Google verified via DNS TXT record
     me: 'info@interiordesignvadodara.in',
   },
 }

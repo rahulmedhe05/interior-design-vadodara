@@ -9,8 +9,8 @@ const business = businesses[0]; // Interior Designers is the first (and only) bu
 
 // Generate metadata for SEO - Homepage
 export const metadata: Metadata = {
-  title: `Best Interior Designers in Vadodara | ${siteConfig.businessName}`,
-  description: `Looking for the best interior designers in Vadodara? ${siteConfig.businessName} offers premium home interior design, modular kitchen, bedroom & office interiors. 15+ years experience, 500+ projects. Free 3D design consultation! Call ${siteConfig.contact.phone}`,
+  title: `Best Interior Designers in Vadodara | 500+ Projects ✓ Free 3D Design`,
+  description: `Looking for the best interior designers in Vadodara? ✓ 15+ Years Experience ✓ 500+ Happy Clients ✓ Free 3D Consultation ✓ Modular Kitchen, Bedroom, Living Room & Office Interiors. Call ${siteConfig.contact.phone} for a free quote!`,
   keywords: [
     "interior designers in vadodara",
     "best interior designers vadodara",
@@ -24,13 +24,19 @@ export const metadata: Metadata = {
     "2bhk interior vadodara",
     "interior decorator vadodara",
     "home interiors vadodara",
+    "flat interior design vadodara",
+    "house interior vadodara",
+    "interior design company vadodara",
+    "home renovation vadodara",
+    "kitchen interior design vadodara",
+    "luxury interior design vadodara",
   ],
   alternates: {
     canonical: siteConfig.url,
   },
   openGraph: {
     title: `Best Interior Designers in Vadodara | ${siteConfig.businessName}`,
-    description: `Transform your space with Vadodara's most trusted interior designers. Free 3D design consultation, 15+ years experience, 500+ projects completed.`,
+    description: `Transform your space with Vadodara's most trusted interior designers. ✓ Free 3D consultation ✓ 15+ years experience ✓ 500+ projects completed.`,
     type: "website",
     locale: "en_IN",
     url: siteConfig.url,
@@ -38,8 +44,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Interior Designers in Vadodara",
-    description: `Premium interior design services in Vadodara. Call ${siteConfig.contact.phone}`,
+    title: "Best Interior Designers in Vadodara | 500+ Projects",
+    description: `Premium interior design services in Vadodara. ✓ Free 3D Design ✓ Call ${siteConfig.contact.phone}`,
   },
   robots: {
     index: true,
