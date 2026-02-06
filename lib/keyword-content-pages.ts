@@ -2738,6 +2738,6 @@ export function getAllKeywordPages(): string[] {
     "turnkey-solutions", "villa-interior-design"
   ];
   
-  // Return keywords directly without "-in-vadodara" suffix (domain already has "vadodara")
-  return baseKeywords;
+  // Add "-in-vadodara" suffix to all keywords
+  return baseKeywords.map(slug => `${slug}-in-vadodara`);
 }
