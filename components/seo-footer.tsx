@@ -120,7 +120,7 @@ export function SEOFooter() {
                   return keyword ? (
                     <li key={slug}>
                       <Link
-                        href={`/interior-designers/${slug}`}
+                        href={`/${slug}`}
                         className="text-gray-400 hover:text-amber-400 transition-colors block py-0.5"
                       >
                         {keyword.title.replace(" in Vadodara", "")}
@@ -138,7 +138,7 @@ export function SEOFooter() {
                 {popularAreas.map((area) => (
                   <li key={area}>
                     <Link
-                      href={`/interior-designers/${area}`}
+                      href={`/${area}`}
                       className="text-gray-400 hover:text-amber-400 transition-colors block py-0.5"
                     >
                       {getAreaDisplayName(area)}
@@ -150,7 +150,7 @@ export function SEOFooter() {
                 href="/interior-designers" 
                 className="text-amber-400 hover:text-amber-300 text-xs mt-3 inline-flex items-center gap-1"
               >
-                View All Areas <ExternalLink className="w-3 h-3" />
+                View All Services <ExternalLink className="w-3 h-3" />
               </Link>
             </div>
           </div>
@@ -170,7 +170,7 @@ export function SEOFooter() {
             {vadodaraAreas.map((area) => (
               <Link
                 key={`id-${area}`}
-                href={`/interior-designers/${area}`}
+                href={`/${area}`}
                 className="text-gray-500 hover:text-amber-400 transition-colors block py-0.5 break-inside-avoid"
               >
                 Interior Designer in {getAreaDisplayName(area)}
@@ -194,7 +194,7 @@ export function SEOFooter() {
               <ul className="space-y-0.5">
                 {keywordCategories.home.slice(0, 5).map((k) => (
                   <li key={k.slug}>
-                    <Link href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                    <Link href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                       {k.title.replace(" in Vadodara", "")}
                     </Link>
                   </li>
@@ -208,7 +208,7 @@ export function SEOFooter() {
               <ul className="space-y-0.5">
                 {keywordCategories.bedroom.slice(0, 5).map((k) => (
                   <li key={k.slug}>
-                    <Link href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                    <Link href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                       {k.title.replace(" in Vadodara", "")}
                     </Link>
                   </li>
@@ -222,7 +222,7 @@ export function SEOFooter() {
               <ul className="space-y-0.5">
                 {keywordCategories.flat.map((k) => (
                   <li key={k.slug}>
-                    <Link href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                    <Link href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                       {k.title.replace(" in Vadodara", "")}
                     </Link>
                   </li>
@@ -236,7 +236,7 @@ export function SEOFooter() {
               <ul className="space-y-0.5">
                 {keywordCategories.kitchen.slice(0, 5).map((k) => (
                   <li key={k.slug}>
-                    <Link href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                    <Link href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                       {k.title.replace(" in Vadodara", "")}
                     </Link>
                   </li>
@@ -250,7 +250,7 @@ export function SEOFooter() {
               <ul className="space-y-0.5">
                 {keywordCategories.office.slice(0, 5).map((k) => (
                   <li key={k.slug}>
-                    <Link href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                    <Link href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                       {k.title.replace(" in Vadodara", "")}
                     </Link>
                   </li>
@@ -264,7 +264,7 @@ export function SEOFooter() {
               <ul className="space-y-0.5">
                 {keywordCategories.commercial.slice(0, 5).map((k) => (
                   <li key={k.slug}>
-                    <Link href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                    <Link href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                       {k.title.replace(" in Vadodara", "")}
                     </Link>
                   </li>
@@ -277,22 +277,22 @@ export function SEOFooter() {
           <div className="mt-6 pt-6 border-t border-gray-800">
             <div className="flex flex-wrap justify-center gap-x-4 gap-y-1 text-[10px]">
               {keywordCategories.living.slice(0, 3).map((k) => (
-                <Link key={k.slug} href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                <Link key={k.slug} href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                   {k.title.replace(" in Vadodara", "")}
                 </Link>
               ))}
               {keywordCategories.kids.slice(0, 3).map((k) => (
-                <Link key={k.slug} href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                <Link key={k.slug} href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                   {k.title.replace(" in Vadodara", "")}
                 </Link>
               ))}
               {keywordCategories.renovation.map((k) => (
-                <Link key={k.slug} href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                <Link key={k.slug} href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                   {k.title.replace(" in Vadodara", "")}
                 </Link>
               ))}
               {keywordCategories.turnkey.slice(0, 3).map((k) => (
-                <Link key={k.slug} href={`/interior-designers/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
+                <Link key={k.slug} href={`/${k.slug}`} className="text-gray-500 hover:text-amber-400 transition-colors">
                   {k.title.replace(" in Vadodara", "")}
                 </Link>
               ))}
